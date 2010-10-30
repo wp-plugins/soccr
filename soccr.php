@@ -50,7 +50,16 @@ class SoccrCore {
     public function GetNextMatchByTeam($teamId, $leagueShortcut) {
         $openLigaDB = new OpenLigaDB();
         $client = $this->GetWebserviceClient();
-        $fromDate = mktime(date("H"), date("i"), 0, date("m"), date("d"), date("Y"));
+
+
+        $currentHour = date("H");
+        $displayHour = 0;
+        if($currentHour <= 21):
+            $displayHour = $currentHour+2;
+        endif;
+
+
+        $fromDate = mktime($displayHour, 0, 0, date("m"), date("d"), date("Y"));
         $toDate = mktime(0, 0, 0, date("m"), date("d") + 30, date("Y"));
 
 

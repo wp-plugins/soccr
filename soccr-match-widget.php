@@ -10,7 +10,7 @@
 
         // Display Widget
         function widget($args, $instance) {
-            $cacheKey = "soccr_match_" + $instance['widgettype'];
+            $cacheKey = "soccr_match_" . $instance['widgettype'];
             $match = wp_cache_get($cacheKey);
             
             if($match == null)
