@@ -94,8 +94,17 @@ class SoccrCore {
     public function GetLastMatchByTeam($teamId, $leagueShortcut) {
         $openLigaDB = new OpenLigaDB();
         $client = $this->GetWebserviceClient();
+
+
+        $currentHour = date("H");
+        $displayHour = 0;
+        if($currentHour <= 21):
+            $displayHour = $currentHour+2;
+        endif;
+
+
         $fromDate = mktime(0, 0, 0, date("m"), date("d") - 60, date("Y"));
-        $toDate = mktime(0, 0, 0, date("m"), date("d"), date("Y"));
+        $toDate = mktime($displayHour, 0, 0, date("m"), date("d"), date("Y"));
 
         $matches = $openLigaDB->GetMatchdataByLeagueDateTime($client, $leagueShortcut, $fromDate, $toDate);
         $result = $this->SortStdArray($matches->GetMatchdataByLeagueDateTimeResult->Matchdata, "matchDateTime");

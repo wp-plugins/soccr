@@ -11,8 +11,7 @@
         // Display Widget
         function widget($args, $instance) {
             $cacheKey = "soccr_match_" . $instance['widgettype'];
-            $match = wp_cache_get($cacheKey);
-            
+            $match = wp_cache_get($cacheKey);        
             if($match == null)
             {
                 $SoccrCore = new SoccrCore();
@@ -121,8 +120,10 @@
             <p>
                 <label for="<?php echo $this->get_field_id('widgettype'); ?>"></label>
                 <select class="widefat" id="<?php echo $this->get_field_id('widgettype'); ?>" name="<?php echo $this->get_field_name('widgettype'); ?>">
-                    <option value="next">Next Match</option>
-                    <option value="last">Last Match</option>
+                  
+                    
+                    <option value="next"<?php if($instance['widgettype'] == "next"): ?>selected="selected"<?php endif;?>>Next Match</option>
+                    <option value="last"<?php if($instance['widgettype'] == "last"): ?>selected="selected"<?php endif;?>>Last Match</option>
                 </select>
             </p>
             <p>
