@@ -47,22 +47,58 @@ class SoccrCore {
         return $return;
         }
 
+    private function DateAdd($interval, $number, $date) {
+
+    $date_time_array = getdate($date);
+    $hours = $date_time_array['hours'];
+    $minutes = $date_time_array['minutes'];
+    $seconds = $date_time_array['seconds'];
+    $month = $date_time_array['mon'];
+    $day = $date_time_array['mday'];
+    $year = $date_time_array['year'];
+
+    switch ($interval) {
+
+        case 'yyyy':
+            $year+=$number;
+            break;
+        case 'q':
+            $year+=($number*3);
+            break;
+        case 'm':
+            $month+=$number;
+            break;
+        case 'y':
+        case 'd':
+        case 'w':
+            $day+=$number;
+            break;
+        case 'ww':
+            $day+=($number*7);
+            break;
+        case 'h':
+            $hours+=$number;
+            break;
+        case 'n':
+            $minutes+=$number;
+            break;
+        case 's':
+            $seconds+=$number;
+            break;
+    }
+       $timestamp= mktime($hours,$minutes,$seconds,$month,$day,$year);
+    return $timestamp;
+}
+
     public function GetNextMatchByTeam($teamId, $leagueShortcut) {
         $openLigaDB = new OpenLigaDB();
         $client = $this->GetWebserviceClient();
 
+        $currentDate = mktime(date("H"), date("i"), 0, date("m"), date("d"), date("Y"));
 
-        $currentHour = date("H");
-        $displayHour = 0;
-        if($currentHour <= 21):
-            $displayHour = $currentHour-2;
-        endif;
-
-
-        $fromDate = mktime($displayHour, 0, 0, date("m"), date("d"), date("Y"));
-        $toDate = mktime(0, 0, 0, date("m"), date("d") + 30, date("Y"));
-
-
+        $fromDate = $this->DateAdd("h", -2, $currentDate);
+        $toDate = $this->DateAdd("d", 30, $currentDate);
+        
         $matches = $openLigaDB->GetMatchdataByLeagueDateTime($client, $leagueShortcut, $fromDate, $toDate);
 
         foreach ($matches->GetMatchdataByLeagueDateTimeResult->Matchdata as $match) {
@@ -95,12 +131,11 @@ class SoccrCore {
         $openLigaDB = new OpenLigaDB();
         $client = $this->GetWebserviceClient();
 
-
-       
-
-        $fromDate = mktime(0, 0, 0, date("m"), date("d") - 60, date("Y"));
-        $toDate = mktime($date("H"), 0, 0, date("m"), date("d"), date("Y"));
-
+        $currentDate = mktime(date("H"), date("i"), 0, date("m"), date("d"), date("Y"));
+      
+        $fromDate = $this->DateAdd("d", -60, $currentDate);
+        $toDate = $this->DateAdd("h", +2, $currentDate);
+           
         $matches = $openLigaDB->GetMatchdataByLeagueDateTime($client, $leagueShortcut, $fromDate, $toDate);
         $result = $this->SortStdArray($matches->GetMatchdataByLeagueDateTimeResult->Matchdata, "matchDateTime");
         $i = 0;
