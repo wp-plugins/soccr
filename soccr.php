@@ -4,7 +4,7 @@
   Plugin URI: http://www.eracer.de/Soccr
   Description: Provides a widget to display the last or next match for a specified team. Currently supporting German Bundesliga 1-3. Powered by openligadb.de
   Author: Stevie
-  Version: 0.83 Beta
+  Version: 0.84 Beta
   Author URI: http://www.eracer.de
  */
 
@@ -55,7 +55,7 @@ class SoccrCore {
         $currentHour = date("H");
         $displayHour = 0;
         if($currentHour <= 21):
-            $displayHour = $currentHour+2;
+            $displayHour = $currentHour-2;
         endif;
 
 
@@ -96,15 +96,10 @@ class SoccrCore {
         $client = $this->GetWebserviceClient();
 
 
-        $currentHour = date("H");
-        $displayHour = 0;
-        if($currentHour <= 21):
-            $displayHour = $currentHour+2;
-        endif;
-
+       
 
         $fromDate = mktime(0, 0, 0, date("m"), date("d") - 60, date("Y"));
-        $toDate = mktime($displayHour, 0, 0, date("m"), date("d"), date("Y"));
+        $toDate = mktime($date("H"), 0, 0, date("m"), date("d"), date("Y"));
 
         $matches = $openLigaDB->GetMatchdataByLeagueDateTime($client, $leagueShortcut, $fromDate, $toDate);
         $result = $this->SortStdArray($matches->GetMatchdataByLeagueDateTimeResult->Matchdata, "matchDateTime");
