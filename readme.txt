@@ -1,7 +1,7 @@
 === Plugin Name ===
 Contributors: Stevie
 Donate link: http://www.eracer.de/soccr
-Tags: soccer, results, sport
+Tags: soccer, results, sport, bundesliga
 Requires at least: 2.8.1
 Tested up to: 3.01
 Stable tag: 0.81
