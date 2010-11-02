@@ -16,7 +16,7 @@ Provides a widget to display the last or next match for a specified team. Curren
 
 1. Upload the whole plugin-folder to the `/wp-content/plugins/` directory
 2. Activate the plugin through the 'Plugins' menu in WordPress
-1. Place `<?php do_action('plugin_name_hook'); ?>` in your templates
+1. Go to "Widgets" and put the soccr-widget to your sidebar
 
 == Screenshots ==
 
