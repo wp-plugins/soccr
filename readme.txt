@@ -1,7 +1,7 @@
 === Plugin Name ===
-Contributors: Stevie
+Contributors: rockschtar
 Donate link: http://www.eracer.de/
-Tags: soccer, results, sport, bundesliga
+Tags: soccer, results, sport, bundesliga, fussball
 Requires at least: 2.8.6
 Tested up to: 3.01
 Stable tag: 0.9
