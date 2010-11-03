@@ -173,8 +173,7 @@ class SoccrCore {
         return $this->SortStdArray($teams->GetTeamsByLeagueSaisonResult->Team,"teamName");
     }
 
-    public function GetAvailLeagues()
-    {
+    public function GetAvailLeagues() {
         $openLigaDB = new OpenLigaDB();
         $client = $this->GetWebserviceClient();
         $leagues = $openLigaDB->GetAvailLeagues($client);
