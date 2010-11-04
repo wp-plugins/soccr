@@ -106,20 +106,14 @@ class SoccrCore {
         $client = $this->GetWebserviceClient();
 
         //league matches
-        $leaguesMatches = $openLigaDB->GetMatchdataByLeagueDateTime($client, $leagueShortcut, $fromDate, $toDate)->GetMatchdataByLeagueDateTimeResult->Matchdata;
+        $leaguesMatches = (array)$openLigaDB->GetMatchdataByLeagueDateTime($client, $leagueShortcut, $fromDate, $toDate)->GetMatchdataByLeagueDateTimeResult->Matchdata;
 
         //national cup matches
-        $cupMatches = $openLigaDB->GetMatchdataByLeagueDateTime($client, $cupShortcut, $fromDate, $toDate)->GetMatchdataByLeagueDateTimeResult->Matchdata;
+        $cupMatches = (array)$openLigaDB->GetMatchdataByLeagueDateTime($client, $cupShortcut, $fromDate, $toDate)->GetMatchdataByLeagueDateTimeResult->Matchdata;    
 
-        (array)$allMatches;
-
-        if($cupMatches != null && $leaguesMatches != null):
-            $allMatches = array_merge($leaguesMatches, $cupMatches);
-        elseif($cupMatches != null && $leaguesMatches == null):
-            $allMatches = $cupMatches;
-        elseif($cupMatches == null && $leaguesMatches != null):
-            $allMatches = $leaguesMatches;
-        endif;
+        $allMatches = array();
+        $allMatches = array_merge($allMatches, $leaguesMatches);
+        $allMatches = array_merge($allMatches, $cupMatches);
 
         return $allMatches;
 
@@ -128,11 +122,13 @@ class SoccrCore {
     private function GetMatchdataByLeagueDateTimeTeam($leagueShortcut, $teamId, $fromDate, $toDate)
     {
         $allMatches = $this->GetMatchdataByLeagueDateTime($leagueShortcut, $fromDate, $toDate);
-
+   
         if($allMatches != null):
             $soccrMatches = array();
-            foreach ($allMatches as $match) {
+            foreach ($allMatches as $match):
+                
                 if ($match->idTeam1 == $teamId || $match->idTeam2 == $teamId) {
+
                     $soccrMatch = new SoccrMatch(
                                     $match->idTeam1,
                                     $match->idTeam2,
@@ -150,7 +146,7 @@ class SoccrCore {
 
                     array_push($soccrMatches, $soccrMatch);
                 }
-            }
+            endforeach;
             
             if(sizeof($soccrMatches) == 0)
             {
