@@ -119,8 +119,7 @@ class SoccrCore {
 
     }
 
-    private function GetMatchdataByLeagueDateTimeTeam($leagueShortcut, $teamId, $fromDate, $toDate)
-    {
+    private function GetMatchdataByLeagueDateTimeTeam($leagueShortcut, $teamId, $fromDate, $toDate) {
         $allMatches = $this->GetMatchdataByLeagueDateTime($leagueShortcut, $fromDate, $toDate);
    
         if($allMatches != null):
@@ -176,8 +175,7 @@ class SoccrCore {
         return reset($matches);
     }
 
-    public function GetLastMatchByTeam($teamId, $leagueShortcut)
-    {
+    public function GetLastMatchByTeam($teamId, $leagueShortcut) {
         $currentDate = mktime(date("H"), date("i"), 0, date("m"), date("d"), date("Y"));
         $fromDate = $this->DateAdd("d", -60, $currentDate);
         $toDate = $this->DateAdd("h", +2, $currentDate);
