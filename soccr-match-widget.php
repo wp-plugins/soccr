@@ -36,7 +36,7 @@
             <ul>
 
                 <?php if($match == null): ?>
-                    <?php echo __("No match availible"); ?>
+                    <?php echo __("No match available"); ?>
                 <?php else: ?>
                   <table class="soccr_match_widget" border="0" style="border: none;">
                         <tr>
