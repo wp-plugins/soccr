@@ -34,8 +34,11 @@
         <li id="recruitments_widget" class="widget-container">
             <h3 class="widget-title"><?php echo  $instance['title'] ?></h3>
             <ul>
-             
-                    <table class="soccr_match_widget" border="0" style="border: none;">
+
+                <?php if($match == null): ?>
+                    Nothing to see
+                <?php else: ?>
+                  <table class="soccr_match_widget" border="0" style="border: none;">
                         <tr>
                             <td colspan="3" style="text-align: center; padding-bottom: 5px;"><?php echo $match->date; ?> - <?php echo $match->time; ?> Uhr</td>
                         </tr>
@@ -63,6 +66,8 @@
                             </tr>
                         <?php endif; ?>
                         </table>
+                <?php endif; ?>
+                  
                    
                 </ul>
         </li>

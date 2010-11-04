@@ -11,9 +11,18 @@
 // References
 require_once("references/OpenLigaDB.php");
 
-// Core-Classes
+// Globals
+class SoccrGlobals
+{
+    public static $german_cup_shortcut = "dfb10";
+    public static $euroleague_shortcut = "el2010";
+    public static $championsleague_shortcut = "cl1011";
+}
+
+// Core
 class SoccrCore {
 
+    // private functions
     private function GetWebserviceClient() {
         $options = array('encoding' => 'UTF-8',
             'connection_timeout' => 5,
@@ -90,59 +99,41 @@ class SoccrCore {
     return $timestamp;
 }
 
-    public function GetNextMatchByTeam($teamId, $leagueShortcut) {
+    private function GetMatchdataByLeagueDateTime($leagueShortcut, $fromDate, $toDate)
+    {
+        $cupShortcut = SoccrGlobals::$german_cup_shortcut;
         $openLigaDB = new OpenLigaDB();
         $client = $this->GetWebserviceClient();
 
-        $currentDate = mktime(date("H"), date("i"), 0, date("m"), date("d"), date("Y"));
+        //league matches
+        $leaguesMatches = $openLigaDB->GetMatchdataByLeagueDateTime($client, $leagueShortcut, $fromDate, $toDate)->GetMatchdataByLeagueDateTimeResult->Matchdata;
 
-        $fromDate = $this->DateAdd("h", -2, $currentDate);
-        $toDate = $this->DateAdd("d", 30, $currentDate);
-        
-        $matches = $openLigaDB->GetMatchdataByLeagueDateTime($client, $leagueShortcut, $fromDate, $toDate);
+        //national cup matches
+        $cupMatches = $openLigaDB->GetMatchdataByLeagueDateTime($client, $cupShortcut, $fromDate, $toDate)->GetMatchdataByLeagueDateTimeResult->Matchdata;
 
-        foreach ($matches->GetMatchdataByLeagueDateTimeResult->Matchdata as $match) {
-            if ($match->idTeam1 == $teamId || $match->idTeam2 == $teamId) {
+        (array)$allMatches;
 
-                $soccrMatch = new SoccrMatch(
-                                $match->idTeam1,
-                                $match->idTeam2,
-                                $match->nameTeam1,
-                                $match->nameTeam2,
-                                $match->matchDateTimeUTC,
-                                $match->iconUrlTeam1,
-                                $match->iconUrlTeam2,
-                                $match->location->locationCity,
-                                $match->location->locationStadium,
-                                $match->matchIsFinished,
-                                $match->pointsTeam1,
-                                $match->pointsTeam2
-                );
+        if($cupMatches != null && $leaguesMatches != null):
+            $allMatches = array_merge($leaguesMatches, $cupMatches);
+        elseif($cupMatches != null && $leaguesMatches == null):
+            $allMatches = $cupMatches;
+        elseif($cupMatches == null && $leaguesMatches != null):
+            $allMatches = $leaguesMatches;
+        endif;
 
+        return $allMatches;
 
-                break;
-            }
-        }
-
-        return $soccrMatch;
     }
 
-    public function GetLastMatchByTeam($teamId, $leagueShortcut) {
-        $openLigaDB = new OpenLigaDB();
-        $client = $this->GetWebserviceClient();
+    private function GetMatchdataByLeagueDateTimeTeam($leagueShortcut, $teamId, $fromDate, $toDate)
+    {
+        $allMatches = $this->GetMatchdataByLeagueDateTime($leagueShortcut, $fromDate, $toDate);
 
-        $currentDate = mktime(date("H"), date("i"), 0, date("m"), date("d"), date("Y"));
-      
-        $fromDate = $this->DateAdd("d", -60, $currentDate);
-        $toDate = $this->DateAdd("h", +2, $currentDate);
-           
-        $matches = $openLigaDB->GetMatchdataByLeagueDateTime($client, $leagueShortcut, $fromDate, $toDate);
-        $result = $this->SortStdArray($matches->GetMatchdataByLeagueDateTimeResult->Matchdata, "matchDateTime");
-        $i = 0;
-        foreach ($result as $match) {
-            if ($match->idTeam1 == $teamId || $match->idTeam2 == $teamId) {
-
-                    $soccrMatches[$i] = new SoccrMatch(
+        if($allMatches != null):
+            $soccrMatches = array();
+            foreach ($allMatches as $match) {
+                if ($match->idTeam1 == $teamId || $match->idTeam2 == $teamId) {
+                    $soccrMatch = new SoccrMatch(
                                     $match->idTeam1,
                                     $match->idTeam2,
                                     $match->nameTeam1,
@@ -156,12 +147,54 @@ class SoccrCore {
                                     $match->pointsTeam1,
                                     $match->pointsTeam2
                     );
-                    $i = $i + 1;
+
+                    array_push($soccrMatches, $soccrMatch);
                 }
             }
+            
+            if(sizeof($soccrMatches) == 0)
+            {
+                return null;
+            }
 
-       $lastMatch = $soccrMatches[$i-1];
-        return $lastMatch;
+            return $this->SortStdArray($soccrMatches, "matchDateTimeUTC");
+          else:
+              return null;
+          endif;
+
+    }
+    
+    // public functions
+    public function GetNextMatchByTeam($teamId, $leagueShortcut) {
+        $currentDate = mktime(date("H"), date("i"), 0, date("m"), date("d"), date("Y"));
+        $fromDate = $this->DateAdd("h", -2, $currentDate);
+        $toDate = $this->DateAdd("d", 60, $currentDate);
+
+        $matches = $this->GetMatchdataByLeagueDateTimeTeam($leagueShortcut, $teamId, $fromDate, $toDate);
+
+        if($matches == null)
+        {
+            return null;
+        }
+
+        return reset($matches);
+    }
+
+    public function GetLastMatchByTeam($teamId, $leagueShortcut)
+    {
+        $currentDate = mktime(date("H"), date("i"), 0, date("m"), date("d"), date("Y"));
+        $fromDate = $this->DateAdd("d", -60, $currentDate);
+        $toDate = $this->DateAdd("h", +2, $currentDate);
+
+        $matches = $this->GetMatchdataByLeagueDateTimeTeam($leagueShortcut, $teamId, $fromDate, $toDate);
+
+        if($matches == null)
+        {
+            return null;
+        }
+
+        return end($matches);
+
     }
 
     public function GetAvailibleTeams($leagueShortcut, $season) {
@@ -182,6 +215,7 @@ class SoccrCore {
 
 }
 
+// Match
 class SoccrMatch {
 
     public $teamId1, $teamId2, $teamName1, $teamName2, $date, $time, $IconUrlTeam1, $IconUrlTeam2, $LocationCity, $LocationStadium, $MatchIsFinished, $GoalsTeam1, $GoalsTeam2;
@@ -193,6 +227,7 @@ class SoccrMatch {
         $this->teamName2 = $teamName2;
         $this->date = $this->ParseMatchDateTime($matchDateTimeUTC, "GetDate");
         $this->time = $this->ParseMatchDateTime($matchDateTimeUTC, "GetTime");
+        $this->matchDateTimeUTC = $matchDateTimeUTC;
         $this->MatchIsFinished = $matchIsFinished;
         $this->IconUrlTeam1 = $iconUrlTeam1;
         $this->IconUrlTeam2 = $iconUrlTeam2;
