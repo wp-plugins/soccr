@@ -31,7 +31,7 @@
         
         ?>
 
-        <li id="recruitments_widget" class="widget-container">
+        <li id="soccr_match_widget_<?php echo $instance['widgettype'] ?>" class="widget-container">
             <h3 class="widget-title"><?php echo  $instance['title'] ?></h3>
             <ul>
 
