@@ -64,6 +64,18 @@
                                 <td style="text-align: center;"></td>
                                 <td style="text-align: center;"><?php echo $match->GoalsTeam2; ?></td>
                             </tr>
+                            <tr>
+                                <td colspan="3" align="center" style="padding-top: 5px;">
+                                    <table border="0" style="border: none;">
+                                        <?php foreach($match->SoccrGoals as $soccrGoal): ?>
+                                            <tr>
+                                                <td><?php echo $soccrGoal->GoalScoreTeam1 ?>:<?php echo $soccrGoal->GoalScoreTeam2 ?>&nbsp;</td>
+                                                <td><?php echo $soccrGoal->GoalGetterName ?> (<?php echo $soccrGoal->GoalMinute ?>.)</td>
+                                             </tr>
+                                        <?php endforeach; ?>
+                                    </table>
+                                </td>
+                            </tr>
                         <?php endif; ?>
                         </table>
                 <?php endif; ?>

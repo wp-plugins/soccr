@@ -4,7 +4,7 @@
   Plugin URI: http://www.eracer.de/Soccr
   Description: Provides a widget to display the last or next match for a specified team. Currently supporting German Bundesliga 1-3. Powered by openligadb.de
   Author: Stevie
-  Version: 0.95 Beta
+  Version: 0.96 Beta
   Author URI: http://www.eracer.de
  */
 
@@ -140,7 +140,8 @@ class SoccrCore {
                                     $match->location->locationStadium,
                                     $match->matchIsFinished,
                                     $match->pointsTeam1,
-                                    $match->pointsTeam2
+                                    $match->pointsTeam2,
+                                    $match->goals
                     );
 
                     array_push($soccrMatches, $soccrMatch);
@@ -162,7 +163,7 @@ class SoccrCore {
     // public functions
     public function GetNextMatchByTeam($teamId, $leagueShortcut) {
         $currentDate = mktime(date("H"), date("i"), 0, date("m"), date("d"), date("Y"));
-        $fromDate = $this->DateAdd("h", -2, $currentDate);
+        $fromDate = $this->DateAdd("h", -3, $currentDate);
         $toDate = $this->DateAdd("d", 60, $currentDate);
 
         $matches = $this->GetMatchdataByLeagueDateTimeTeam($leagueShortcut, $teamId, $fromDate, $toDate);
@@ -178,7 +179,7 @@ class SoccrCore {
     public function GetLastMatchByTeam($teamId, $leagueShortcut) {
         $currentDate = mktime(date("H"), date("i"), 0, date("m"), date("d"), date("Y"));
         $fromDate = $this->DateAdd("d", -60, $currentDate);
-        $toDate = $this->DateAdd("h", +2, $currentDate);
+        $toDate = $this->DateAdd("h", -3, $currentDate);
 
         $matches = $this->GetMatchdataByLeagueDateTimeTeam($leagueShortcut, $teamId, $fromDate, $toDate);
 
@@ -212,9 +213,31 @@ class SoccrCore {
 // Match
 class SoccrMatch {
 
-    public $teamId1, $teamId2, $teamName1, $teamName2, $date, $time, $IconUrlTeam1, $IconUrlTeam2, $LocationCity, $LocationStadium, $MatchIsFinished, $GoalsTeam1, $GoalsTeam2;
+    public $teamId1, $teamId2, $teamName1, $teamName2, $date, $time, $IconUrlTeam1, $IconUrlTeam2, $LocationCity, $LocationStadium, $MatchIsFinished, $GoalsTeam1, $GoalsTeam2, $SoccrGoals;
 
-    public function __construct($teamId1, $teamId2, $teamName1, $teamName2, $matchDateTimeUTC, $iconUrlTeam1, $iconUrlTeam2, $locationCity, $locationStadium, $matchIsFinished, $goalsTeam1, $goalsTeam2) {
+    public function __construct($teamId1, $teamId2, $teamName1, $teamName2, $matchDateTimeUTC, $iconUrlTeam1, $iconUrlTeam2, $locationCity, $locationStadium, $matchIsFinished, $goalsTeam1, $goalsTeam2, $goals) {
+
+        $soccrGoals = array();
+
+        $goals = $goals->Goal;
+
+        if($goals != null):
+        foreach($goals as $goal)
+        {
+            $soccrGoal = new SoccrGoal(
+                    $goal->goalScoreTeam1,
+                    $goal->goalScoreTeam2,
+                    $goal->goalGetterName,
+                    $goal->goalMatchMinute,
+                    $goal->goalOwnGoal, 
+                    $goal->goalPenalty);
+
+            array_push($soccrGoals, $soccrGoal);
+        }
+        endif;
+
+        $xx = $soccrGoals;
+
         $this->teamId1 = $teamId1;
         $this->teamId2 = $teamId2;
         $this->teamName1 = $teamName1;
@@ -230,6 +253,8 @@ class SoccrMatch {
         $this->GoalsTeam1 = $goalsTeam1;
         $this->GoalsTeam2 = $goalsTeam2;
         $this->MatchIsFinished = $matchIsFinished;
+        $this->SoccrGoals = $soccrGoals;
+
     }
 
     function ParseMatchDateTime($matchDateTimeUTC, $mode) {
@@ -251,6 +276,21 @@ class SoccrMatch {
         }
     }
 
+}
+
+// Goals
+class SoccrGoal {
+    public $GoalScoreTeam1, $GoalScoreTeam2, $GoalGetterName, $GoalMinute, $IsOwnGoal, $IsPenalty;
+
+    public function __construct($goalScoreTeam1, $goalScoreTeam2, $goalGetterName, $goalMinute, $isOwnGoal, $isPenalty)
+    {
+        $this->GoalScoreTeam1 = $goalScoreTeam1;
+        $this->GoalScoreTeam2 = $goalScoreTeam2;
+        $this->GoalGetterName = $goalGetterName;
+        $this->GoalMinute = $goalMinute;
+        $this->IsOwnGoal = $isOwnGoal;
+        $this->IsPenalty = $isPenalty;
+    }
 }
 
 // Widgets
