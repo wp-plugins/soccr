@@ -64,6 +64,7 @@
                                 <td style="text-align: center;"></td>
                                 <td style="text-align: center;"><?php echo $match->GoalsTeam2; ?></td>
                             </tr>
+                            <?php if(1==2): ?>
                             <tr>
                                 <td colspan="3" align="center" style="padding-top: 5px;">
                                     <table border="0" style="border: none;">
@@ -76,6 +77,7 @@
                                     </table>
                                 </td>
                             </tr>
+                            <?php endif; ?>
                         <?php endif; ?>
                         </table>
                 <?php endif; ?>
