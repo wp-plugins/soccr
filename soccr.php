@@ -41,6 +41,22 @@ class SoccrCore {
         return $client;
     }
 
+    private function IsOpenLigaDbUp() {
+        $default = ini_get("default_socket_timeout");
+        ini_set("default_socket_timeout","05");
+        set_time_limit(5);
+        $f=fopen("http://www.OpenLigaDB.de","r");
+        $r=fread($f,1000);
+        fclose($f);
+        ini_set("default_socket_timeout",$default);
+        
+        if(strlen($r)>1) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     private function SortStdArray($array,$index) {
         $sort=array() ;
         $return=array() ;
@@ -104,21 +120,33 @@ class SoccrCore {
         $openLigaDB = new OpenLigaDB();
         $client = $this->GetWebserviceClient();
 
-        //league matches
-        $leaguesMatches = (array)$openLigaDB->GetMatchdataByLeagueDateTime($client, $leagueShortcut, $fromDate, $toDate)->GetMatchdataByLeagueDateTimeResult->Matchdata;
-
-        //national cup matches
-        $cupMatches = (array)$openLigaDB->GetMatchdataByLeagueDateTime($client, $cupShortcut, $fromDate, $toDate)->GetMatchdataByLeagueDateTimeResult->Matchdata;    
-
         $allMatches = array();
-        $allMatches = array_merge($allMatches, $leaguesMatches);
-        $allMatches = array_merge($allMatches, $cupMatches);
 
+        if($this->IsOpenLigaDbUp())
+        {
+            //league matches
+            $leaguesMatches = (array)$openLigaDB->GetMatchdataByLeagueDateTime($client, $leagueShortcut, $fromDate, $toDate)->GetMatchdataByLeagueDateTimeResult->Matchdata;
+
+            //national cup matches
+            $cupMatches = (array)$openLigaDB->GetMatchdataByLeagueDateTime($client, $cupShortcut, $fromDate, $toDate)->GetMatchdataByLeagueDateTimeResult->Matchdata;
+
+            $allMatches = array_merge($allMatches, $leaguesMatches);
+            $allMatches = array_merge($allMatches, $cupMatches);
+        }
+        
         return $allMatches;
     }
 
     private function GetMatchdataByLeagueDateTimeTeam($leagueShortcut, $teamId, $fromDate, $toDate) {
-        $allMatches = $this->GetMatchdataByLeagueDateTime($leagueShortcut, $fromDate, $toDate);
+
+        if($this->IsOpenLigaDbUp)
+        {
+            $allMatches = $this->GetMatchdataByLeagueDateTime($leagueShortcut, $fromDate, $toDate);
+        }
+        else
+        {
+            $allMatches = null;
+        }
    
         if($allMatches != null):
             $soccrMatches = array();
