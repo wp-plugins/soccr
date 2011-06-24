@@ -14,9 +14,11 @@ require_once("references/OpenLigaDB.php");
 // Globals
 class SoccrGlobals
 {
-    public static $german_cup_shortcut = "dfb10";
+    public static $german_cup_shortcut = "dfb11";
     public static $euroleague_shortcut = "el2010";
     public static $championsleague_shortcut = "cl1011";
+    public static $cacheGroup = "SoccrCache";
+
 }
 
 // Core
@@ -139,7 +141,7 @@ class SoccrCore {
 
     private function GetMatchdataByLeagueDateTimeTeam($leagueShortcut, $teamId, $fromDate, $toDate) {
 
-        if($this->IsOpenLigaDbUp)
+        if($this->IsOpenLigaDbUp())
         {
             $allMatches = $this->GetMatchdataByLeagueDateTime($leagueShortcut, $fromDate, $toDate);
         }

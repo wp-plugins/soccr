@@ -12,7 +12,7 @@
         function widget($args, $instance) {
             $cacheKey = "soccr_match_" . $instance['widgettype'];
             $match = wp_cache_get($cacheKey);        
-            if($match == null)
+            if($match == null || $match == false)
             {
                 $SoccrCore = new SoccrCore();
 
@@ -25,7 +25,7 @@
                     $match = $SoccrCore->GetLastMatchByTeam($instance['team'], $instance["leagueShortcut"]);
                 }
 
-                wp_cache_add($cacheKey, $match);
+                wp_cache_set($cacheKey, $match);
             }
 
         
