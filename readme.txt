@@ -29,7 +29,6 @@ the directory of the stable readme.txt, so in this case, `/tags/4.3/screenshot-1
 = 0.963 =
 * New Season! Bundesliga and DFB-Pokal for 2011/2012 works now.
 
-
 = 0.95 =
 * Refactoring. Added DFB-Pokal.
 
