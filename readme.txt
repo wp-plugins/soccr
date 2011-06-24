@@ -4,7 +4,7 @@ Donate link: http://www.eracer.de/
 Tags: soccer, results, sport, bundesliga, fussball, widget
 Requires at least: 2.8.6
 Tested up to: 3.13
-Stable tag: 0.963
+Stable tag: 0.964
 
 Provides a widget to display the last or next match for a specified team. Currently supporting German Bundesliga 1-3. Powered by openligadb.de
 
