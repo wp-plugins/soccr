@@ -16,7 +16,7 @@ class SoccrGlobals
 {
     public static $german_cup_shortcut = "dfb11";
     public static $euroleague_shortcut = "el2010";
-    public static $championsleague_shortcut = "cl1011";
+    public static $championsleague_shortcut = "cl1112";
     public static $cacheGroup = "SoccrCache";
 
 }
