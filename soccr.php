@@ -4,7 +4,7 @@
   Plugin URI: http://www.eracer.de/soccr
   Description: Provides a widget to display the last or next match for a specified team. Currently supporting German Bundesliga 1-3. Powered by openligadb.de
   Author: Stevie
-  Version: 0.965 Beta
+  Version: 0.966 Beta
   Author URI: http://www.eracer.de
  */
 
@@ -18,7 +18,6 @@ class SoccrGlobals
     public static $euroleague_shortcut = "el2010";
     public static $championsleague_shortcut = "cl1112";
     public static $cacheGroup = "SoccrCache";
-
 }
 
 // Core
