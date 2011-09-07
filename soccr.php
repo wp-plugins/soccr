@@ -335,3 +335,4 @@ function soccr_add_css() {
 }
 
 add_action('wp_print_styles', 'soccr_add_css');
+?>
