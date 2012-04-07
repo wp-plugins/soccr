@@ -11,6 +11,8 @@
         // Display Widget
         function widget($args, $instance) {
             $cacheKey = "soccr_match_" . $instance['widgettype'];
+            
+            extract($args);
             $match = wp_cache_get($cacheKey);        
             if($match == null || $match == false)
             {
@@ -28,16 +30,21 @@
                 wp_cache_set($cacheKey, $match);
             }
 
-        
+
+           
+            
         ?>
 
-        <li id="soccr_match_widget_<?php echo $instance['widgettype'] ?>" class="widget-container">
-            <h3 class="widget-title"><?php echo  $instance['title'] ?></h3>
-            <ul>
 
                 <?php if($match == null): ?>
                     <?php echo __("No match available"); ?>
                 <?php else: ?>
+                    <?php 
+                        echo $before_widget;
+                        if (!empty($title)):
+                            echo $before_title . $title . $after_title;
+                        endif;
+                    ?>
                   <table class="soccr_match_widget" border="0" style="border: none;">
                         <tr>
                             <td colspan="3" style="text-align: center; padding-bottom: 5px;"><?php echo $match->date; ?> - <?php echo $match->time; ?> Uhr</td>
@@ -80,11 +87,11 @@
                             <?php endif; ?>
                         <?php endif; ?>
                         </table>
+                    <?php  echo $after_widget; ?>
                 <?php endif; ?>
                   
                    
-                </ul>
-        </li>
+  
         <?php
             }
 
