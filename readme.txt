@@ -24,10 +24,10 @@ Provides a widget to display the last or next match for a specified team. Curren
 the directory of the stable readme.txt, so in this case, `/tags/4.3/screenshot-1.png` (or jpg, jpeg, gif)
 2. This is the second screen shot
 
-== Changelog ==
+e== Changelog ==
 
-= 0.97 =
-* Fixed widget display
+= 0.967 =
+* Update - DFB-Pokal 11/12 and Champions League
 
 = 0.965 =
 * Added Champions-League 2011/2012
