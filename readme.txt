@@ -3,8 +3,8 @@ Contributors: rockschtar
 Donate link: http://www.eracer.de/
 Tags: soccer, results, sport, bundesliga, fussball, widget
 Requires at least: 2.8.6
-Tested up to: 3.13
-Stable tag: 0.97
+Tested up to: 3.4
+Stable tag: 0.98
 
 Provides a widget to display the last or next match for a specified team. Currently supporting German Bundesliga 1-3. Powered by openligadb.de
 
@@ -26,7 +26,7 @@ the directory of the stable readme.txt, so in this case, `/tags/4.3/screenshot-1
 
 e== Changelog ==
 
-= 0.967 =
+= 0.98 =
 * Update - DFB-Pokal 11/12 and Champions League
 
 = 0.965 =
