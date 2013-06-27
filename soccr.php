@@ -15,7 +15,7 @@ require_once("references/OpenLigaDB.php");
 class SoccrGlobals
 {
     public static $german_cup_shortcut = "dfb12";
-    public static $euroleague_shortcut = "el2010";
+    public static $euroleague_shortcut = "el";
     public static $championsleague_shortcut = "cl";
     public static $cacheGroup = "SoccrCache";
 }
