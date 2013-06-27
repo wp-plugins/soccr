@@ -153,9 +153,9 @@ class Soccr_Widget_Match extends WP_Widget {
             </select>
         </p>
         <p>
-            <label for="<?php echo $this->get_field_id('season'); ?>">Season:</label>
+            <label for="<?php echo $this->get_field_id('season'); ?>">Season <?php echo $currentYear; ?>:</label>
             <select onchange="soccr_get_availible_teams('<?php echo $this->get_field_id('leagueShortcut'); ?>','<?php echo $this->get_field_id('team'); ?>','<?php echo $this->get_field_id('season'); ?>');" class="widefat" id="<?php echo $this->get_field_id('season'); ?>" name="<?php echo $this->get_field_name('season'); ?>">
-        <?php for ($s = $currentYear - 1; $s <= $currentYear + 1; $s++): ?>
+        <?php for ($s = $currentYear - 1; $s <= $currentYear; $s++): ?>
             <?php
             $selected = "";
             if ($instance["season"] == $s):
