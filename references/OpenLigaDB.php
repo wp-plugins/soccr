@@ -219,10 +219,10 @@ class OpenLigaDB
         catch(SoapFault $fault) {
         
             $result = "Error getting GetTeamsByLeagueSaison<hr>Prams:<li>".implode('<li>', $params).'<hr>'.$fault;
-            
+            return new SOCCR_StatusResponse(SOCCR_Status::FAILED, $result);
         }
         
-        return $result;
+          return new SOCCR_StatusResponse(SOCCR_Status::SUCCESS, $result);
         
     }
 

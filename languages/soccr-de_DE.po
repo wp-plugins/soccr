@@ -1,0 +1,63 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Soccr\n"
+"POT-Creation-Date: 2014-03-22 15:45+0100\n"
+"PO-Revision-Date: 2014-03-22 15:45+0100\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: de_DE\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.6.4\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
+"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;"
+"_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: widgets/class-soccr-widget.php:7
+msgid "Soccr Widget"
+msgstr ""
+
+#: widgets/class-soccr-widget.php:7
+msgid "Displays last or next match from a specified team"
+msgstr ""
+"Zeigt das letzte oder nächste Spiel eines Vereins aus der ersten, zweiten "
+"oder dritten Fußball-Bundesliga an"
+
+#: widgets/class-soccr-widget.php:17 widgets/class-soccr-widget.php:32
+msgid "Next Match"
+msgstr "Nächstes Spiel"
+
+#: widgets/class-soccr-widget.php:26
+#, fuzzy
+msgid "Title"
+msgstr "Titel"
+
+#: widgets/class-soccr-widget.php:30
+#, fuzzy
+msgid "Mode"
+msgstr "Modus"
+
+#: widgets/class-soccr-widget.php:33
+msgid "Last Match"
+msgstr "Nächstes Spiel"
+
+#: widgets/class-soccr-widget.php:37
+msgid "League"
+msgstr "Liga"
+
+#: widgets/class-soccr-widget.php:45
+msgid "Season"
+msgstr "Saison"
+
+#: widgets/class-soccr-widget.php:53
+msgid "Team"
+msgstr "Mannschaft"
+
+#: widgets/class-soccr-widget.php:104
+msgid "No match available"
+msgstr "Kein Spiel gefunden"
