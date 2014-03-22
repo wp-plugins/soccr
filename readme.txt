@@ -2,6 +2,7 @@
 Contributors: rockschtar
 Donate link: http://www.eracer.de/
 Tags: soccer, results, sport, bundesliga, fussball, widget, fußball
+Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=B2WSC5FR2L8MU
 Requires at least: 2.8.6
 Tested up to: 3.8.1
 Stable tag: 1.5
