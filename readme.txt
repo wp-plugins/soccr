@@ -24,7 +24,7 @@ Provides a widget to display the last or next match for a specified team. Curren
 the directory of the stable readme.txt, so in this case, `/tags/4.3/screenshot-1.png` (or jpg, jpeg, gif)
 2. This is the second screen shot
 
-e== Changelog ==
+== Changelog ==
 
 = 1.0 =
 * Fixed HTML of widget
