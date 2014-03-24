@@ -20,5 +20,6 @@ require_once(SOCCR_PLUGIN_DIR . "controller/class-ajax-controller.php");
 require_once(SOCCR_PLUGIN_DIR . "models/class-status-response-model.php");
 require_once(SOCCR_PLUGIN_DIR . "widgets/class-soccr-widget.php");
 
+//hello world
 new SOCCR_PluginController();
 ?>
