@@ -9,7 +9,7 @@ class Soccr_Widget_Match extends WP_Widget {
     }
 
     function form($instance) {
-        $SoccrCore = new SoccrCore();
+        $SoccrCore = new SOCCR_Core();
         $currentYear = date("Y");
 
         $instance_league_shortcut = isset($instance['leagueShortcut']) ? $instance['leagueShortcut'] : "bl1";
@@ -72,10 +72,10 @@ class Soccr_Widget_Match extends WP_Widget {
             </select> 
         </p>
         <p>
-            <?php _e("Untersützte die Entwicklung von Soccr und weiteren Plugins mit einer kleinen Spende", "soccr"); ?>
+            <?php _e("Please support Plugin Development with a small donation", "soccr"); ?>
         </p>
         <p>
-            <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=<?php echo $paypal_button_code; ?>" target="_blank"><img src="<?php echo SOCCR_PLUGIN_URL ?>assets/images/paypal_donate_<?php echo $locale ?>.gif" alt="Plugin Entwicklung unterstützen und Spenden" /></a>
+            <a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=<?php echo $paypal_button_code; ?>" target="_blank"><img src="<?php echo SOCCR_PLUGIN_URL ?>assets/images/paypal_donate_<?php echo $locale ?>.gif" alt="Plugin Entwicklung unterstÃ¼tzen und Spenden" /></a>
         </p>
         <?php
     }
@@ -101,9 +101,9 @@ class Soccr_Widget_Match extends WP_Widget {
         $transient_key = SOCCR_Constants::TRANSIENT_WIDGET_MATCH_CACHE . "_" . $this->id;
 
         $match = get_transient($transient_key);
-
+    
         if ($match === false || $match === null) {
-            $SoccrCore = new SoccrCore();
+            $SoccrCore = new SOCCR_Core();
 
             if ($instance['widgettype'] == "next") {
                 $match = $SoccrCore->GetNextMatchByTeam($instance['team'], $instance["leagueShortcut"]);
@@ -175,4 +175,3 @@ class Soccr_Widget_Match extends WP_Widget {
     }
 
 }
-?>

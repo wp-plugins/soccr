@@ -11,15 +11,18 @@
 define("SOCCR_PLUGIN_DIR", plugin_dir_path(__FILE__));
 define("SOCCR_PLUGIN_URL", plugin_dir_url(__FILE__));
 define("SOCCR_PLUGIN_RELATIVE_DIR", dirname(plugin_basename(__FILE__)));
+define("SOCCR_OLDB_CUP_SHORTCUT", "dfb2013");
 
 require_once(SOCCR_PLUGIN_DIR . "references/OpenLigaDB.php");
+
 require_once(SOCCR_PLUGIN_DIR . "classes/class-soccr.php");
 require_once(SOCCR_PLUGIN_DIR . "classes/class-constants.php");
 require_once(SOCCR_PLUGIN_DIR . "controller/class-plugin-controller.php");
 require_once(SOCCR_PLUGIN_DIR . "controller/class-ajax-controller.php");
 require_once(SOCCR_PLUGIN_DIR . "models/class-status-response-model.php");
+require_once(SOCCR_PLUGIN_DIR . "models/class-goal-model.php");
+require_once(SOCCR_PLUGIN_DIR . "models/class-match-model.php");
+
 require_once(SOCCR_PLUGIN_DIR . "widgets/class-soccr-widget.php");
 
-//hello world
 new SOCCR_PluginController();
-?>

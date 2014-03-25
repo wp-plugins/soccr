@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Soccr\n"
-"POT-Creation-Date: 2014-03-22 15:45+0100\n"
-"PO-Revision-Date: 2014-03-22 15:45+0100\n"
+"POT-Creation-Date: 2014-03-24 20:15+0100\n"
+"PO-Revision-Date: 2014-03-24 20:16+0100\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: de_DE\n"
@@ -18,9 +18,17 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-SearchPath-0: .\n"
 
+#: controller/class-plugin-controller.php:24
+msgid "Loading...Please wait"
+msgstr "Lade Mannschaften...Bitte warten"
+
+#: controller/class-plugin-controller.php:24
+msgid "No Teams available"
+msgstr "Keine Mannschaften verfügbar"
+
 #: widgets/class-soccr-widget.php:7
 msgid "Soccr Widget"
-msgstr ""
+msgstr "Soccr Widget"
 
 #: widgets/class-soccr-widget.php:7
 msgid "Displays last or next match from a specified team"
@@ -28,36 +36,41 @@ msgstr ""
 "Zeigt das letzte oder nächste Spiel eines Vereins aus der ersten, zweiten "
 "oder dritten Fußball-Bundesliga an"
 
-#: widgets/class-soccr-widget.php:17 widgets/class-soccr-widget.php:32
+#: widgets/class-soccr-widget.php:17 widgets/class-soccr-widget.php:46
 msgid "Next Match"
 msgstr "Nächstes Spiel"
 
-#: widgets/class-soccr-widget.php:26
+#: widgets/class-soccr-widget.php:40
 #, fuzzy
 msgid "Title"
 msgstr "Titel"
 
-#: widgets/class-soccr-widget.php:30
+#: widgets/class-soccr-widget.php:44
 #, fuzzy
 msgid "Mode"
 msgstr "Modus"
 
-#: widgets/class-soccr-widget.php:33
+#: widgets/class-soccr-widget.php:47
 msgid "Last Match"
 msgstr "Nächstes Spiel"
 
-#: widgets/class-soccr-widget.php:37
+#: widgets/class-soccr-widget.php:51
 msgid "League"
 msgstr "Liga"
 
-#: widgets/class-soccr-widget.php:45
+#: widgets/class-soccr-widget.php:59
 msgid "Season"
 msgstr "Saison"
 
-#: widgets/class-soccr-widget.php:53
+#: widgets/class-soccr-widget.php:67
 msgid "Team"
 msgstr "Mannschaft"
 
-#: widgets/class-soccr-widget.php:104
+#: widgets/class-soccr-widget.php:75
+msgid "Please support Plugin Development with a small donation"
+msgstr ""
+"Bitte unterstütze die Plugin-Entwicklung von Soccr mit einer kleinen Spende"
+
+#: widgets/class-soccr-widget.php:124
 msgid "No match available"
 msgstr "Kein Spiel gefunden"

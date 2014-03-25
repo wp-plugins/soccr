@@ -1,16 +1,4 @@
 <?php
-
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/**
- * Description of class-ajax-controller
- *
- * @author Stevie
- */
 class SOCCR_AjaxController {
 
     public function __construct() {
@@ -21,7 +9,7 @@ class SOCCR_AjaxController {
 
         $response = array();
 
-        $SoccrCore = new SoccrCore();
+        $SoccrCore = new SOCCR_Core();
         $status_response = $SoccrCore->GetAvailibleTeams($_GET["leagueShortcut"], $_GET["season"]);
 
         if (SOCCR_Status::SUCCESS === $status_response->get_status()):
