@@ -3,8 +3,8 @@ Contributors: rockschtar
 Tags: soccer, results, sport, bundesliga, fussball, widget, fußball
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=B2WSC5FR2L8MU
 Requires at least: 2.8.6
-Tested up to: 3.8.1
-Stable tag: 1.5
+Tested up to: 4.0
+Stable tag: 1.6
 
 Provides a widget to display the last or next match for a specified team. Currently supporting German Bundesliga 1-3. Powered by openligadb.de
 
