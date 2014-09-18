@@ -1,5 +1,4 @@
 <?php
-
 class SOCCR_Core {
 
     public function GetNextMatchByTeam($teamId, $leagueShortcut) {
