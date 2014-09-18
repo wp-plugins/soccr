@@ -9,21 +9,20 @@ class SOCCR_AjaxController {
 
         $response = array();
 
+        $league_shortcut = filter_input(INPUT_GET, "leagueShortcut", FILTER_SANITIZE_STRIPPED);
+        $season = filter_input(INPUT_GET, "season", FILTER_SANITIZE_STRIPPED);
+                
         $SoccrCore = new SOCCR_Core();
-        $status_response = $SoccrCore->GetAvailibleTeams($_GET["leagueShortcut"], $_GET["season"]);
+        $status_response = $SoccrCore->GetAvailibleTeams($league_shortcut, $season);
 
         if (SOCCR_Status::SUCCESS === $status_response->get_status()):
             foreach ($status_response->get_response_object() as $team):
                 array_push($response, array("team_id" => $team->teamID, "team_name" => $team->teamName));
             endforeach;
         endif;
-
-
-
-
+        
         echo json_encode($response);
-
-
+        
         die();
     }
 

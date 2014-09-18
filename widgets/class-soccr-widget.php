@@ -101,7 +101,7 @@ class Soccr_Widget_Match extends WP_Widget {
         $transient_key = SOCCR_Constants::TRANSIENT_WIDGET_MATCH_CACHE . "_" . $this->id;
 
         $match = get_transient($transient_key);
-    
+ 
         if ($match === false || $match === null) {
             $SoccrCore = new SOCCR_Core();
 
