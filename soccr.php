@@ -5,14 +5,14 @@
   Plugin URI: http://www.eracer.de/soccr
   Description: Provides a widget to display the last or next match for a specified team. Currently supporting German Bundesliga 1-3. Powered by openligadb.de
   Author: Stevie
-  Version: 1.6
+  Version: 1.6.1
   Author URI: http://www.eracer.de
  */
 
 define("SOCCR_PLUGIN_DIR", plugin_dir_path(__FILE__));
 define("SOCCR_PLUGIN_URL", plugin_dir_url(__FILE__));
 define("SOCCR_PLUGIN_RELATIVE_DIR", dirname(plugin_basename(__FILE__)));
-define("SOCCR_OLDB_CUP_SHORTCUT", "dfb2013");
+define("SOCCR_OLDB_CUP_SHORTCUT", "dfb_pok");
 
 require_once(SOCCR_PLUGIN_DIR . "references/OpenLigaDB.php");
 
